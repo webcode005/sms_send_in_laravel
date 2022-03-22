@@ -1,0 +1,26 @@
+public function index(Request $request)
+    {
+        
+        
+        //get method request
+        $username = 't1baltrahome';
+        $password = '123456789';
+        $url = 'http://www.nimbusit.co.in/api/swsend.asp';
+        
+        $senderID = '1234';
+        $PhNo = $request->input('PhNo');
+        $MSG = $request->input('MSG');
+        
+       echo $data="username=".$username."&password=".$password."&sender=".$senderID."&sendto=".$PhNo."&message=".$MSG; exit;
+        
+        //The function uses CURL for posting data to
+        $objURL = curl_init($url); 
+        curl_setopt($objURL,CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($objURL,CURLOPT_POST,1);
+        curl_setopt($objURL, CURLOPT_POSTFIELDS,$data);
+        $retval = trim(curl_exec($objURL));
+        curl_close($objURL);
+        return $retval;
+        
+                
+    }
